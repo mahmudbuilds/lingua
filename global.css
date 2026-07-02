@@ -1,0 +1,77 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+@theme {
+  --color-primary: #6C4EF5;
+  --color-primary-deep: #5B3BF6;
+  --color-primary-blue: #4D8BFF;
+  --color-primary-green: #21C16B;
+
+  --color-success: #21C16B;
+  --color-warning: #FFC800;
+  --color-streak: #FF8A00;
+  --color-error: #FF4D4F;
+  --color-info: #4D8BFF;
+
+  --color-text-primary: #0D132B;
+  --color-text-secondary: #6B7280;
+  --color-border: #E5E7EB;
+  --color-surface: #F6F7FB;
+  --color-background: #FFFFFF;
+
+  --font-poppins: 'Poppins-Regular', sans-serif;
+  --font-poppins-medium: 'Poppins-Medium', sans-serif;
+  --font-poppins-semibold: 'Poppins-SemiBold', sans-serif;
+  --font-poppins-bold: 'Poppins-Bold', sans-serif;
+}
+
+@utility h1 {
+  font-family: var(--font-poppins-bold);
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+@utility h2 {
+  font-family: var(--font-poppins-semibold);
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+@utility h3 {
+  font-family: var(--font-poppins-semibold);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+@utility h4 {
+  font-family: var(--font-poppins-medium);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+@utility body-lg {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@utility body {
+  font-family: var(--font-poppins);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@utility body-sm {
+  font-family: var(--font-poppins);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@utility caption {
+  font-family: var(--font-poppins);
+  font-size: 11px;
+  line-height: 1.4;
+}
