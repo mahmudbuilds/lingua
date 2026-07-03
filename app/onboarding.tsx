@@ -31,6 +31,29 @@ const ONBOARDING_PAGES = [
   },
 ];
 
+const FloatingBubble = ({ text, style, color, rotation }: { text: string; style: any; color: string; rotation: string }) => (
+  <View
+    style={[
+      style,
+      {
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        borderRadius: 24,
+        backgroundColor: color,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        transform: [{ rotate: rotation }],
+      },
+    ]}
+    className="absolute border border-gray-100/50 z-10"
+  >
+    <Text className="text-sm font-semibold text-gray-800">{text}</Text>
+  </View>
+);
+
 export default function OnboardingScreen() {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,7 +94,10 @@ export default function OnboardingScreen() {
         </View>
 
         {/* Mascot Image */}
-        <View className="items-center justify-center flex-1 w-full">
+        <View className="items-center justify-center flex-1 w-full relative">
+          <FloatingBubble text="Hi" style={{ top: 40, left: 60 }} color="#D1FAE5" rotation="-10deg" />
+          <FloatingBubble text="Hola" style={{ top: 80, right: 40 }} color="#DBEAFE" rotation="15deg" />
+          <FloatingBubble text="Bonjour" style={{ bottom: 20, left: 40 }} color="#FEF3C7" rotation="-5deg" />
           <Image 
             source={item.image} 
             style={{ width: 320, height: 320 }} 
