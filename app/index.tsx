@@ -1,5 +1,6 @@
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
 export default function Index() {
   return (
@@ -9,6 +10,15 @@ export default function Index() {
         <Text className="body text-text-secondary mb-8">
           Poppins is a modern, geometric sans-serif typeface that provides excellent readability and a friendly personality.
         </Text>
+
+        <View className="mb-8 p-4 bg-white rounded-xl border border-border">
+          <Text className="h3 text-text-primary mb-2">Screens</Text>
+          <Link href="/onboarding" asChild>
+            <TouchableOpacity className="bg-primary py-3 px-4 rounded-xl items-center mb-2">
+              <Text className="body-lg text-white font-bold">Go to Onboarding</Text>
+            </TouchableOpacity>
+          </Link>
+        </View>
 
         <View className="mb-8">
           <Text className="h1 text-text-primary mb-4">H1 - Page / Screen Title</Text>
