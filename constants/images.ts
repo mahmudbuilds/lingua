@@ -5,6 +5,7 @@ import earth from "@/assets/images/earth.png";
 import palace from "@/assets/images/palace.png";
 import streakFire from "@/assets/images/streak-fire.png";
 import treasure from "@/assets/images/treasure.png";
+import googleLogo from "@/assets/images/google-logo.png";
 
 export const images = {
   mascotAuth,
@@ -14,4 +15,5 @@ export const images = {
   palace,
   streakFire,
   treasure,
+  googleLogo,
 };

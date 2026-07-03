@@ -74,8 +74,7 @@ export default function OnboardingScreen() {
         animated: true,
       });
     } else {
-      // Final action - usually go to login/signup or main app
-      // router.push('/(auth)'); 
+      router.push('/(auth)/sign-up');
     }
   };
 
