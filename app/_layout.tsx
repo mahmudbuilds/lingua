@@ -52,6 +52,7 @@ const InitialLayout = () => {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="onboarding" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack.Screen name="choose-language" options={{ headerShown: false }} />
     </Stack>
   );
 }
