@@ -1,6 +1,9 @@
 {
   "name": "clerk-expo",
-  "scripts": { "start": "expo start" },
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start"
+  },
   "dependencies": {
     "@clerk/expo": "latest",
     "expo": "latest",

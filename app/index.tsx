@@ -20,6 +20,11 @@ export default function Index() {
               <Text className="body-lg text-white font-bold">Go to Onboarding</Text>
             </TouchableOpacity>
           </Link>
+          <Link href="/choose-language" asChild>
+            <TouchableOpacity className="bg-primary-deep py-3 px-4 rounded-xl items-center mb-2">
+              <Text className="body-lg text-white font-bold">Language Selection</Text>
+            </TouchableOpacity>
+          </Link>
           <TouchableOpacity onPress={() => signOut()} className="bg-error py-3 px-4 rounded-xl items-center mb-2 mt-2">
             <Text className="body-lg text-white font-bold">Sign Out</Text>
           </TouchableOpacity>
