@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Modal, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, type Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useSignUp } from '@clerk/expo';
 
 interface VerificationModalProps {
   visible: boolean;
@@ -13,6 +14,7 @@ export default function VerificationModal({ visible, onClose, email }: Verificat
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef<Array<TextInput | null>>([]);
   const router = useRouter();
+  const { signUp, fetchStatus, errors } = useSignUp();
 
   useEffect(() => {
     if (visible) {
@@ -38,7 +40,7 @@ export default function VerificationModal({ visible, onClose, email }: Verificat
       const nextIndex = Math.min(index + digits.length, 5);
       inputRefs.current[nextIndex]?.focus();
       if (newCode.every(c => c !== '')) {
-         onComplete();
+         onComplete(newCode.join(''));
       }
       return;
     }
@@ -52,7 +54,7 @@ export default function VerificationModal({ visible, onClose, email }: Verificat
     }
     
     if (newCode.every(c => c !== '')) {
-       onComplete();
+       onComplete(newCode.join(''));
     }
   };
 
@@ -65,12 +67,45 @@ export default function VerificationModal({ visible, onClose, email }: Verificat
     }
   };
 
-  const onComplete = () => {
-    // Small delay to let the user see the last digit
-    setTimeout(() => {
-      onClose();
-      router.replace('/');
-    }, 300);
+  const onComplete = async (codeString: string) => {
+    if (!signUp) return;
+    try {
+      await signUp.verifications.verifyEmailCode({ code: codeString });
+      
+      if (signUp.status === 'complete') {
+        await signUp.finalize({
+          navigate: ({ session, decorateUrl }) => {
+            if (session?.currentTask) {
+              console.log(session?.currentTask);
+              return;
+            }
+            onClose();
+            const url = decorateUrl('/');
+            if (url.startsWith('http')) {
+              window.location.href = url;
+            } else {
+              router.replace(url as Href);
+            }
+          },
+        });
+      } else {
+        console.error('Sign-up attempt not complete:', signUp);
+      }
+    } catch (err: any) {
+      console.error(err);
+      alert('An unexpected error occurred during verification.');
+    }
+  };
+
+  const handleResend = async () => {
+    if (!signUp) return;
+    try {
+      await signUp.verifications.sendEmailCode();
+      alert('Verification code resent successfully!');
+    } catch (err: any) {
+      console.error(err);
+      alert('An error occurred while resending the code.');
+    }
   };
 
   return (
@@ -124,7 +159,7 @@ export default function VerificationModal({ visible, onClose, email }: Verificat
               ))}
             </View>
 
-            <TouchableOpacity className="items-center">
+            <TouchableOpacity className="items-center" onPress={handleResend}>
               <Text className="text-primary body-lg font-bold">Resend Code</Text>
             </TouchableOpacity>
 

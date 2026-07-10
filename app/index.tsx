@@ -1,8 +1,10 @@
 import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
+import { useAuth } from "@clerk/expo";
 
 export default function Index() {
+  const { signOut } = useAuth();
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F6F7FB' }}>
       <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 64 }} className="flex-1">
@@ -18,6 +20,9 @@ export default function Index() {
               <Text className="body-lg text-white font-bold">Go to Onboarding</Text>
             </TouchableOpacity>
           </Link>
+          <TouchableOpacity onPress={() => signOut()} className="bg-error py-3 px-4 rounded-xl items-center mb-2 mt-2">
+            <Text className="body-lg text-white font-bold">Sign Out</Text>
+          </TouchableOpacity>
         </View>
 
         <View className="mb-8">
